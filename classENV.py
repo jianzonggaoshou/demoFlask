@@ -2,13 +2,12 @@ import pymysql
 import logging
 import dbConfig
 
-conn = pymysql.connect(host=dbConfig.CHARSET, port=dbConfig.PORT,
+conn = pymysql.connect(host=dbConfig.HOST, port=dbConfig.PORT,
                        user=dbConfig.USER, password=dbConfig.PASSWORD,
                        db=dbConfig.DB, charset=dbConfig.CHARSET)
 
 logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s %(filename)s %(funcName)s %(lineno)d %(levelname)s %(message)s',
-                    filename='demo.log')
+                    format='%(asctime)s %(filename)s %(funcName)s line[%(lineno)d] %(levelname)s %(message)s')
 
 
 def test():
