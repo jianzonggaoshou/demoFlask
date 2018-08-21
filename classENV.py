@@ -46,7 +46,7 @@ def addUser(name, age):
         logging.debug(sql)
         cur.execute(sql)
         conn.commit()
-        logging.debug("SQL Query success!")
+        logging.debug("SQL Insert success!")
         return True
     except pymysql.Error as e:
         logging.debug(e)
@@ -54,7 +54,24 @@ def addUser(name, age):
     finally:
         conn.close()
 
+def updateUser(id, name, age):
+    try:
+        cur = conn.cursor()
+        sql = 'UPDATE class SET name = "%s", age=%s WHERE id = %s'%(name,age,id)
+        logging.debug(sql)
+        cur.execute(sql)
+        conn.commit()
+        logging.debug("SQL Update success!")
+        return True
+    except pymysql.Error as e:
+        logging.debug(e)
+        conn.rollback()
+    finally:
+        conn.close()
+
+
 if __name__ == "__main__":
     #temp = queryUser()
     #logging.debug(temp)
-    addUser(name="小明", age=23)
+    #addUser(name="小明", age=23)
+    updateUser(id=1, name="许多", age=13)
