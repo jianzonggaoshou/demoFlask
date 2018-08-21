@@ -20,6 +20,18 @@ class UserResource(Resource):
         classENV.logging.debug(result)
         return result
 
+    def post(self):
+        args = parser.parse_args()
+        PAYLOAD['name'] = args['name']
+        PAYLOAD['age'] = args['age']
+        classENV.logging.debug(PAYLOAD)
+        result = classENV.addUser(name=PAYLOAD['name'], age=PAYLOAD['age'])
+        if result:
+            return {'message': 'add success!'},201
+        else:
+            return {'message': 'add fail!'}
+
+
 api.add_resource(UserResource, '/user')
 
 if __name__ == '__main__':
