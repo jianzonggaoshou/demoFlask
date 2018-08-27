@@ -41,9 +41,20 @@ class UserResource(Resource):
         classENV.logging.debug(PAYLOAD)
         result = classENV.updateUser(id=PAYLOAD['id'], name=PAYLOAD['name'], age=PAYLOAD['age'])
         if result:
-            return {'message': 'update success!'},201
+            return {'message': 'update success!'}
         else:
             return {'message': 'update fail!'}
+
+    def delete(self):
+        args = parser.parse_args()
+        PAYLOAD['id'] = args['id']
+        classENV.logging.debug(PAYLOAD)
+        result = classENV.deleteUser(id=PAYLOAD['id'])
+        if result:
+            return {'message': 'delete success!'}
+        else:
+            return {'message': 'delete fail!'}
+
 
 
 api.add_resource(UserResource, '/user')

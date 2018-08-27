@@ -69,9 +69,26 @@ def updateUser(id, name, age):
     finally:
         conn.close()
 
+def deleteUser(id):
+    try:
+        cur = conn.cursor()
+        sql = 'DELETE FROM class WHERE id=%s'%(id)
+        logging.debug(sql)
+        cur.execute(sql)
+        conn.commit()
+        logging.debug("SQL Delete success!")
+        return True
+    except pymysql.Error as e:
+        logging.debug(e)
+        conn.rollback()
+    finally:
+        conn.close()
+
+
 
 if __name__ == "__main__":
     #temp = queryUser()
     #logging.debug(temp)
     #addUser(name="小明", age=23)
-    updateUser(id=1, name="许多", age=13)
+    #updateUser(id=1, name="许多", age=13)
+    deleteUser(1)
